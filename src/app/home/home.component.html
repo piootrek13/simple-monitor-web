@@ -1,0 +1,17 @@
+<p>
+    <mat-toolbar>
+    <span>Monitor</span>
+  </mat-toolbar>
+</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <ul>
+                <li *ngFor="let d of devices" style="list-style:none;" class="my-1">
+                    <app-device-panel [device]="d"></app-device-panel>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+</div>
