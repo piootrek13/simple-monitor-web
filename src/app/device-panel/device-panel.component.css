@@ -1,0 +1,29 @@
+.device-card{
+    border: 2px solid transparent;
+
+}
+.text-ok{
+    color: green;
+}
+.text-error{
+    color: red;
+    
+}
+.status-ok{
+    border: 2px solid green;
+}
+.status-error{
+    animation: blink-animation 1s infinite;
+}
+
+@keyframes blink-animation {
+    
+    0%{
+        border: 2px solid transparent;
+        background-color: white;
+    }
+    50%{border: 2px solid red;
+        background-color: rgb(255, 230, 230);
+    }
+    
+  }
