@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-title>
+        <span  class="{{mode == 1 ? 'icon-plus' : 'icon-pencil'}}"> {{mode == 1 ? 'Nowe urządzenie' : 'Edytuj'}}</span>
+   </mat-card-title>
+   <mat-card-content class="m-4">
+    <mat-form-field class="edit-field" appearance="fill">
+        <mat-label>Nawa</mat-label>
+        <input matInput  [value]="device.name">
+    </mat-form-field>
+    <mat-form-field class="edit-field" appearance="fill">
+        <mat-label>Adres IP</mat-label>
+        <input matInput  [value]="device.ip">
+    </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button  mat-button color="primary"><span class="icon-floppy" (click)="saveEmit()">Zapisz</span></button>
+        <button  mat-button color="warn"><span class="icon-cancel" (click)="cancelEmit()">Anuluj</span></button>
+    </mat-card-actions>
+</mat-card>

@@ -9,6 +9,11 @@ import { Device, DeviceService } from '../device.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  static readonly MODE_NONE = 0;
+  static readonly MODE_NEW = 1;
+  static readonly MODE_EDIT = 2;
+  mode = HomeComponent.MODE_NONE;
+  editedDevice = new Device();
   deviceService: DeviceService;
   checkSubscription: Subscription = new Subscription;
   devices: Device[] = [];
@@ -42,5 +47,25 @@ export class HomeComponent implements OnInit {
         this.checkingStates = false;
       }
     )
+  }
+  save(device: Device){
+    console.log(device);
+  }
+  setNoneMode(){
+    this.mode = HomeComponent.MODE_NONE;
+
+  }
+  setNewMode(){
+    this.mode = HomeComponent.MODE_NEW;
+    this.editedDevice = new Device();
+  }
+  setEditMode(device: Device){
+    this.mode = HomeComponent.MODE_EDIT;
+    this.editedDevice = new Device();
+    this.editedDevice.id = device.id;
+    this.editedDevice.counter = device.counter;
+    this.editedDevice.ip = device.ip;
+    this.editedDevice.name = device.name;
+    this.editedDevice.state = device.state;
   }
 }

@@ -46,6 +46,24 @@ Font license info
    Homepage:  http://www.mfglabs.com/
 
 
+## Linecons
+
+   Copyright (C) 2013 by Designmodo
+
+   Author:    Designmodo for Smashing Magazine
+   License:   CC BY ()
+   Homepage:  http://designmodo.com/linecons-free/
+
+
+## Iconic
+
+   Copyright (C) 2012 by P.J. Onori
+
+   Author:    P.J. Onori
+   License:   SIL (http://scripts.sil.org/OFL)
+   Homepage:  http://somerandomdude.com/work/iconic/
+
+
 ## Fontelico
 
    Copyright (C) 2012 by Fontello project

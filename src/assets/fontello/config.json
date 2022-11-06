@@ -257,6 +257,48 @@
       "css": "bell",
       "code": 59412,
       "src": "entypo"
+    },
+    {
+      "uid": "1dcd2b2148b7f086a4eb47f6a746bdee",
+      "css": "unlink",
+      "code": 61735,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "8663320a860b00f26e94d3d15c9ba99a",
+      "css": "clock",
+      "code": 59413,
+      "src": "entypo"
+    },
+    {
+      "uid": "f48ae54adfb27d8ada53d0fd9e34ee10",
+      "css": "trash-empty",
+      "code": 59414,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "2aeb4987b469d22fcb8b471b6d2cdfff",
+      "css": "pencil",
+      "code": 59415,
+      "src": "linecons"
+    },
+    {
+      "uid": "1e77a2yvsq3owssduo2lcgsiven57iv5",
+      "css": "pencil-1",
+      "code": 59416,
+      "src": "typicons"
+    },
+    {
+      "uid": "667b873c8422e4cab006df8422cb51c5",
+      "css": "pencil-2",
+      "code": 59417,
+      "src": "iconic"
+    },
+    {
+      "uid": "70370693ada58ef0a60fa0984fe8d52a",
+      "css": "plus",
+      "code": 59418,
+      "src": "entypo"
     }
   ]
 }
