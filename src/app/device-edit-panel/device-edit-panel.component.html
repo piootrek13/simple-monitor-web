@@ -5,11 +5,11 @@
    <mat-card-content class="m-4">
     <mat-form-field class="edit-field" appearance="fill">
         <mat-label>Nawa</mat-label>
-        <input matInput  [value]="device.name">
+        <input matInput  [(ngModel)]="device.name">
     </mat-form-field>
     <mat-form-field class="edit-field" appearance="fill">
         <mat-label>Adres IP</mat-label>
-        <input matInput  [value]="device.ip">
+        <input matInput  [(ngModel)]="device.ip">
     </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">

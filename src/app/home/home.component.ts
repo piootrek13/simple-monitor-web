@@ -46,11 +46,28 @@ export class HomeComponent implements OnInit {
         this.devices = data
         this.checkingStates = false;
       }
-    )
+    );
   }
   save(device: Device){
-    console.log(device);
+    this.checkingStates = true;
+
+    let request;
+    if(device.id>0) request = this.deviceService.editDevice(device);
+    else request = this.deviceService.addDevice(device);
+    request.pipe(
+      catchError(error => { 
+        this.checkingStates=false;
+        return throwError(error); 
+      })
+    ).subscribe(
+      data=>{
+        this.devices = data
+        this.checkingStates = false;
+      }
+    );
+    this.setNoneMode();
   }
+
   setNoneMode(){
     this.mode = HomeComponent.MODE_NONE;
 

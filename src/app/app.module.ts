@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
+import { FormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
@@ -16,7 +17,6 @@ import { HomeComponent } from './home/home.component';
 import { DevicePanelComponent } from './device-panel/device-panel.component';
 import { HttpClient } from '@angular/common/http';
 import { DeviceEditPanelComponent } from './device-edit-panel/device-edit-panel.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 const routes: Routes = [
   {path: '', component: HomeComponent},
  ];
@@ -29,6 +29,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MatToolbarModule,
