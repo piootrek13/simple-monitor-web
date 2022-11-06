@@ -11,13 +11,13 @@ import { MatMenuModule} from '@angular/material/menu';
 import { MatIconModule} from '@angular/material/icon';
 import { MatInputModule} from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { DevicePanelComponent } from './device-panel/device-panel.component';
 import { HttpClient } from '@angular/common/http';
 import { DeviceEditPanelComponent } from './device-edit-panel/device-edit-panel.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 const routes: Routes = [
   {path: '', component: HomeComponent},
  ];
@@ -39,9 +39,10 @@ const routes: Routes = [
     MatMenuModule,
     MatIconModule,
     MatInputModule,
-
+    MatInputModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
