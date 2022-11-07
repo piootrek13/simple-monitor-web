@@ -10,6 +10,7 @@ import { Device } from '../device.service';
 export class DevicePanelComponent implements OnInit {
   @Input() device = new Device();
   @Output() editEmitter = new EventEmitter<Device>();
+  @Output() removeEmitter = new EventEmitter<Device>();
   constructor() { }
 
   ngOnInit(): void {
@@ -18,5 +19,8 @@ export class DevicePanelComponent implements OnInit {
 
   editEmit(){
     this.editEmitter.emit(this.device);
+  }
+  removeEmit(){
+    this.removeEmitter.emit(this.device);
   }
 }

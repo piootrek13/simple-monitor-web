@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { catchError, map, Subscription, throwError, timer } from 'rxjs';
 import { Device, DeviceService } from '../device.service';
+import { RemoveDialogComponent } from '../remove-dialog/remove-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,7 @@ export class HomeComponent implements OnInit {
   checkSubscription: Subscription = new Subscription;
   devices: Device[] = [];
   checkingStates = false;
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private dialog: MatDialog) {
     this.deviceService = new DeviceService(httpClient);
    }
   ngOnDestroy(): void {
@@ -67,7 +69,26 @@ export class HomeComponent implements OnInit {
     );
     this.setNoneMode();
   }
-
+  remove(device: Device){
+    const dialogRef = this.dialog.open(RemoveDialogComponent, {data:{name: device.name}});
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.checkingStates = true;
+        this.deviceService.removeDevice(device.id).pipe(
+          catchError(error => { 
+            this.checkingStates=false;
+            return throwError(error); 
+          })
+        ).subscribe(
+          data=>{
+            this.devices = data
+            this.checkingStates = false;
+          }
+        );
+        this.setNoneMode();
+      }
+    });
+  }
   setNoneMode(){
     this.mode = HomeComponent.MODE_NONE;
 

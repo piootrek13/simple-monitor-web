@@ -8,8 +8,10 @@ import { MatGridListModule} from '@angular/material/grid-list';
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule} from '@angular/material/button';
 import { MatMenuModule} from '@angular/material/menu';
+import { MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule} from '@angular/material/icon';
 import { MatInputModule} from '@angular/material/input';
+import { MatBadgeModule} from '@angular/material/badge';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +19,7 @@ import { HomeComponent } from './home/home.component';
 import { DevicePanelComponent } from './device-panel/device-panel.component';
 import { HttpClient } from '@angular/common/http';
 import { DeviceEditPanelComponent } from './device-edit-panel/device-edit-panel.component';
+import { RemoveDialogComponent } from './remove-dialog/remove-dialog.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
  ];
@@ -25,7 +28,8 @@ const routes: Routes = [
     AppComponent,
     HomeComponent,
     DevicePanelComponent,
-    DeviceEditPanelComponent
+    DeviceEditPanelComponent,
+    RemoveDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +40,8 @@ const routes: Routes = [
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
+    MatBadgeModule,
+    MatDialogModule,
     MatMenuModule,
     MatIconModule,
     MatInputModule,

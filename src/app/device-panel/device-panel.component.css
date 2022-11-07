@@ -2,13 +2,7 @@
     border: 2px solid transparent;
 
 }
-.text-ok{
-    color: green;
-}
-.text-error{
-    color: red;
-    
-}
+
 .status-ok{
     border: 2px solid green;
 }
