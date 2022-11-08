@@ -1,6 +1,10 @@
-<mat-card class="device-card {{device.state==0 ? '' : 'status-error'}}" style="max-width: 600px;">
+<mat-card class="device-card {{device.state==0 ? '' : device.silenced ? 'status-silenced' : 'status-error'}}" style="max-width: 600px;">
      <mat-card-title>
-          {{device.name}}
+          <div>
+               {{device.name}}
+               <button *ngIf="device.state!=0" style="font-size: 18px;" class="btn {{device.silenced ? ' icon-volume-off' : 'icon-volume'}} silence-btn float-end" (click)="setSilencedEmit()"></button>
+          </div>
+
      </mat-card-title>
 
      <mat-card-subtitle>

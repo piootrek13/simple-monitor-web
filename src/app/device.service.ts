@@ -18,6 +18,9 @@ export class DeviceService extends HttpService {
   removeDevice(id: number): Observable<Device[]>{
     return this.http.delete<Device[]>("http://"+this.host+":8080/devices/"+id, this.getOptions());
   }
+  setSilenced(id: number, silenced: boolean): Observable<Device[]>{
+    return this.http.get<Device[]>("http://"+this.host+":8080/devices/silenced/?id="+id+"&silenced="+silenced, this.getOptions());
+  }
 }
 
 export class Device{
@@ -26,4 +29,6 @@ export class Device{
   ip="";
   counter=0;
   state=0;
+  silenced = false
+  active = true
 }

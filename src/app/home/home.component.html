@@ -26,7 +26,7 @@
         <div class="col-6">
             <ul>
                 <li *ngFor="let d of devices" style="list-style:none;" class="my-1">
-                    <app-device-panel [device]="d" (editEmitter)="setEditMode($event)" (removeEmitter)="remove($event)"></app-device-panel>
+                    <app-device-panel [device]="d" (editEmitter)="setEditMode($event)" (removeEmitter)="remove($event)" (setSilencedEmitter)="setSilenced($event)"></app-device-panel>
                 </li>
             </ul>
         </div>

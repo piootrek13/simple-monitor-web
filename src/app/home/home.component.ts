@@ -106,4 +106,18 @@ export class HomeComponent implements OnInit {
     this.editedDevice.name = device.name;
     this.editedDevice.state = device.state;
   }
+  setSilenced(device: Device){
+    this.checkingStates=true;
+    this.deviceService.setSilenced(device.id, device.silenced).pipe(
+      catchError(error => { 
+        this.checkingStates=false;
+        return throwError(error); 
+      })
+    ).subscribe(
+      data=>{
+        this.devices = data
+        this.checkingStates = false;
+      }
+    );
+  }
 }

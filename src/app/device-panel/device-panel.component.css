@@ -9,6 +9,9 @@
 .status-error{
     animation: blink-animation 1s infinite;
 }
+.status-silenced{
+    border: 2px solid red;
+}
 
 @keyframes blink-animation {
     
@@ -16,8 +19,17 @@
         border: 2px solid transparent;
         background-color: white;
     }
-    50%{border: 2px solid red;
+    50%{
+        border: 2px solid red;
         background-color: rgb(255, 230, 230);
     }
     
+  }
+
+  .silence-btn{
+    border: none;
+    color: gray;
+  }
+  .silence-btn:hover{
+    color: rgb(0, 200, 255);
   }
