@@ -305,6 +305,12 @@
       "css": "volume-off",
       "code": 59419,
       "src": "elusive"
+    },
+    {
+      "uid": "7fd683b2c518ceb9e5fa6757f2276faa",
+      "css": "eye-off",
+      "code": 59420,
+      "src": "fontawesome"
     }
   ]
 }

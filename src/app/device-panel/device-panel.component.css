@@ -2,7 +2,9 @@
     border: 2px solid transparent;
 
 }
-
+.device-inactive{
+    background-color: lightgray;
+}
 .status-ok{
     border: 2px solid green;
 }
@@ -30,6 +32,8 @@
     border: none;
     color: gray;
   }
-  .silence-btn:hover{
-    color: rgb(0, 200, 255);
+
+  .silence-active-btn{
+    border: none;
+    color: rgb(0, 150, 255);
   }

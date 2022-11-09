@@ -1,8 +1,8 @@
-<mat-card class="device-card {{device.state==0 ? '' : device.silenced ? 'status-silenced' : 'status-error'}}" style="max-width: 600px;">
+<mat-card class="device-card {{!device.active ? 'device-inactive' : device.state==0 ? '' : device.silenced ? 'status-silenced' : 'status-error'}}" style="max-width: 600px;">
      <mat-card-title>
           <div>
                {{device.name}}
-               <button *ngIf="device.state!=0" style="font-size: 18px;" class="btn {{device.silenced ? ' icon-volume-off' : 'icon-volume'}} silence-btn float-end" (click)="setSilencedEmit()"></button>
+               <button *ngIf="device.state!=0 && device.active" style="font-size: 18px;" class="btn {{device.silenced ? ' icon-volume-off silence-btn' : 'icon-volume silence-active-btn'}}  float-end" (click)="setSilencedEmit()"></button>
           </div>
 
      </mat-card-title>
@@ -11,10 +11,14 @@
           {{device.ip}}
      </mat-card-subtitle>
 
-     <mat-card-content class="d-flex py-2">
-          <p class="my-2 me-4 {{device.state==0 ? 'icon-ok text-ok' : device.state<0 ? 'icon-unlink text-error' : 'icon-bell text-error'}} "> {{device.state==0 ? 'OK' : device.state<0 ? 'BRAK KOMUNIKACJI' : 'ALARM'}}</p>
-          <p *ngIf="device.state>=0"  class="my-2 me-2"> Wystąpienia alarmu: {{device.counter}}</p>
-          <button *ngIf="device.state>=0" mat-button>Zeruj</button>
+     <mat-card-content class="py-2">
+          <p style="color: dimgray;" *ngIf="!device.active" class="h6 my-2 me-4 icon-eye-off">   NIEAKTYWNY</p>
+          <div class="d-flex" *ngIf="device.active">
+               <p class="my-2 me-4 h6 {{device.state==0 ? 'icon-ok text-ok' : device.state<0 ? 'icon-unlink text-error' : 'icon-bell text-error'}} "> {{device.state==0 ? 'OK' : device.state<0 ? 'BRAK KOMUNIKACJI' : 'ALARM'}}</p>
+               <p *ngIf="device.state>=0"  class="my-2 me-2"> Wystąpienia alarmu: {{device.counter}}</p>
+               <button *ngIf="device.state>=0" mat-button>Zeruj</button>
+          </div>
+
      </mat-card-content>
      <mat-card-actions align="end">
           <button  mat-button><span class="icon-clock" >Historia</span></button>

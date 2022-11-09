@@ -37,6 +37,19 @@ export class HomeComponent implements OnInit {
       }) 
     ).subscribe();
   }
+  checkDiffrence(ds: Device[]): boolean{
+    if(ds.length!=this.devices.length) return false;
+    for(let i=0; i<this.devices.length; i++){
+      if(ds[i].name!=this.devices[i].name ||
+        ds[i].counter!=this.devices[i].counter ||
+        ds[i].id!=this.devices[i].id ||
+        ds[i].ip!=this.devices[i].ip ||
+        ds[i].active!=this.devices[i].active ||
+        ds[i].silenced!=this.devices[i].silenced ||
+        ds[i].state!=this.devices[i].state) return false;
+    }
+    return true; 
+  }
   checkStates(){
     this.deviceService.getDevices().pipe(
       catchError(error => { 
@@ -45,11 +58,12 @@ export class HomeComponent implements OnInit {
       })
     ).subscribe(
       data=>{
-        this.devices = data
+        if(!this.checkDiffrence(data)) this.devices = data;
         this.checkingStates = false;
       }
     );
   }
+
   save(device: Device){
     this.checkingStates = true;
 
@@ -105,6 +119,8 @@ export class HomeComponent implements OnInit {
     this.editedDevice.ip = device.ip;
     this.editedDevice.name = device.name;
     this.editedDevice.state = device.state;
+    this.editedDevice.silenced = device.silenced;
+    this.editedDevice.active = device.active;
   }
   setSilenced(device: Device){
     this.checkingStates=true;

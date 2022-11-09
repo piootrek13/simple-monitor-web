@@ -12,6 +12,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule} from '@angular/material/icon';
 import { MatInputModule} from '@angular/material/input';
 import { MatBadgeModule} from '@angular/material/badge';
+import { MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,6 +48,7 @@ const routes: Routes = [
     MatInputModule,
     MatInputModule,
     HttpClientModule,
+    MatCheckboxModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
