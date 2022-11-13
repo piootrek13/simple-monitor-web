@@ -12,10 +12,10 @@
     </mat-menu>
     <span>Monitor</span>
     <span style="flex: 1 1 auto;"></span>
-    <div style="font-size: 16px;" class="me-4 icon-bell">
+    <div style="font-size: 16px;" class="me-4 icon-bell {{alerting ? 'status-error' : ''}}">
         Aktywne alarmy
-        <span style="font-size: 14px !important; font-weight: normal !important;" class="badge rounded-pill bg-success ms-2">
-          0
+        <span style="font-size: 14px !important; font-weight: normal !important;" class="badge rounded-pill {{alertCount<1 ? 'bg-success' : 'bg-danger '}} ms-2">
+          {{alertCount}}
           <span class="visually-hidden">unread messages</span>
         </span>
     </div>

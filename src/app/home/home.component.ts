@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { Conditional } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError, map, Subscription, throwError, timer } from 'rxjs';
@@ -20,6 +21,8 @@ export class HomeComponent implements OnInit {
   checkSubscription: Subscription = new Subscription;
   devices: Device[] = [];
   checkingStates = false;
+  alertCount = 0;
+  alerting=false;
   constructor(private httpClient: HttpClient, private dialog: MatDialog) {
     this.deviceService = new DeviceService(httpClient);
    }
@@ -50,6 +53,13 @@ export class HomeComponent implements OnInit {
     }
     return true; 
   }
+  newData(data:Device[]){
+    
+    if(!this.checkDiffrence(data)){
+      this.devices = data;
+      this.setAlertCount();
+    }
+  }
   checkStates(){
     this.deviceService.getDevices().pipe(
       catchError(error => { 
@@ -58,12 +68,23 @@ export class HomeComponent implements OnInit {
       })
     ).subscribe(
       data=>{
-        if(!this.checkDiffrence(data)) this.devices = data;
+        this.newData(data);
         this.checkingStates = false;
       }
     );
   }
-
+  setAlertCount(){
+    this.alertCount = 0;
+    this.alerting=false;
+    this.devices.forEach(d=>{
+      if(d.state!=0){
+        this.alertCount++;
+        if(!d.silenced){
+           this.alerting = true;
+        }
+      }
+    });
+  }
   save(device: Device){
     this.checkingStates = true;
 
@@ -77,7 +98,7 @@ export class HomeComponent implements OnInit {
       })
     ).subscribe(
       data=>{
-        this.devices = data
+        this.newData(data);
         this.checkingStates = false;
       }
     );
@@ -95,7 +116,7 @@ export class HomeComponent implements OnInit {
           })
         ).subscribe(
           data=>{
-            this.devices = data
+            this.newData(data);
             this.checkingStates = false;
           }
         );
@@ -126,12 +147,14 @@ export class HomeComponent implements OnInit {
     this.checkingStates=true;
     this.deviceService.setSilenced(device.id, device.silenced).pipe(
       catchError(error => { 
+
         this.checkingStates=false;
         return throwError(error); 
       })
     ).subscribe(
       data=>{
-        this.devices = data
+        this.newData(data);
+        this.setAlertCount();
         this.checkingStates = false;
       }
     );

@@ -1,0 +1,16 @@
+.status-error{
+    animation: text-blink-animation 1s infinite;
+}
+
+@keyframes text-blink-animation {
+    
+    0%{
+        
+        color: black;
+    }
+    50%{
+        color: red;
+        
+    }
+    
+}
