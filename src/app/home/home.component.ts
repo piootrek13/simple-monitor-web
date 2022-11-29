@@ -4,7 +4,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError, map, Subscription, throwError, timer } from 'rxjs';
 import { Device, DeviceService } from '../device.service';
+import { EmailSubscriptionService } from '../email-subscription.service';
+import { GroupDialogComponent } from '../group-dialog/group-dialog.component';
 import { RemoveDialogComponent } from '../remove-dialog/remove-dialog.component';
+import { SubscriptionGroup, SubscriptionGroupService } from '../subscription-group.service';
 
 @Component({
   selector: 'app-home',
@@ -15,16 +18,22 @@ export class HomeComponent implements OnInit {
   static readonly MODE_NONE = 0;
   static readonly MODE_NEW = 1;
   static readonly MODE_EDIT = 2;
+  static readonly MODE_SUBSCRIPTION = 3;
   mode = HomeComponent.MODE_NONE;
   editedDevice = new Device();
   deviceService: DeviceService;
+  subscriptionGroupService: SubscriptionGroupService;
+  emailSubscriptionService: EmailSubscriptionService;
   checkSubscription: Subscription = new Subscription;
   devices: Device[] = [];
   checkingStates = false;
   alertCount = 0;
   alerting=false;
+  subscriptionGroups: SubscriptionGroup[] = [];
   constructor(private httpClient: HttpClient, private dialog: MatDialog) {
     this.deviceService = new DeviceService(httpClient);
+    this.subscriptionGroupService = new SubscriptionGroupService(httpClient);
+    this.emailSubscriptionService = new EmailSubscriptionService(httpClient);
    }
   ngOnDestroy(): void {
     this.checkSubscription.unsubscribe();
@@ -132,6 +141,9 @@ export class HomeComponent implements OnInit {
     this.mode = HomeComponent.MODE_NEW;
     this.editedDevice = new Device();
   }
+  setSubscriptionsMode(){
+    this.mode = HomeComponent.MODE_SUBSCRIPTION;
+  }
   setEditMode(device: Device){
     this.mode = HomeComponent.MODE_EDIT;
     this.editedDevice = new Device();
@@ -158,5 +170,36 @@ export class HomeComponent implements OnInit {
         this.checkingStates = false;
       }
     );
+  }
+  refreshSubscriptionGroup(){
+    this.subscriptionGroupService.getGroups().pipe(
+      catchError(error => { 
+                return throwError(error); 
+      })
+    ).subscribe(
+      data=>{
+        this.subscriptionGroups = data;
+      }
+    );
+  }
+  openGroupDialog(){
+    const dialogRef = this.dialog.open(GroupDialogComponent,  {data:{groups: this.subscriptionGroups}});
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        console.log(result);
+        this.subscriptionGroupService.postGroup(result).pipe(
+          catchError(error => { 
+                    return throwError(error); 
+          })
+        ).subscribe(
+          data=>{
+            this.subscriptionGroups = data;
+          }
+        );
+      }
+    });
+  }
+  refreshEmailSubs(group: number){
+    
   }
 }
