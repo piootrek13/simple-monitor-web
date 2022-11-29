@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content>
+
+    <mat-form-field class="edit-field" style="width: 100%;" appearance="fill">
+        <mat-label>Nawa</mat-label>
+        <input matInput  [(ngModel)]="group.name">
+
+    </mat-form-field> 
+    <span *ngIf="nameExistError" class="mx-1 text-danger">Nazwa już istnieje</span>
+    <span *ngIf="emptyFieldError" class="mx-1 text-danger">Pole jest puste</span>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Anuluj</button>
+  <button mat-stroked-button color="primary" (click)="confirm()" cdkFocusInitial>Dodaj</button>
+</mat-dialog-actions>

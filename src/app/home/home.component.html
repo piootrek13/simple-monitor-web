@@ -8,7 +8,11 @@
           <mat-icon>add icon</mat-icon>
           <span>Dodaj urządzenie</span>
         </button>
-        
+
+        <button mat-menu-item  (click)="setSubscriptionsMode()">
+            <mat-icon>speaker_notes</mat-icon>
+            <span>Subskrypcje</span>
+          </button>
     </mat-menu>
     <span>Monitor</span>
     <span style="flex: 1 1 auto;"></span>
@@ -31,7 +35,12 @@
             </ul>
         </div>
         <div class="col-6">
-            <app-device-edit-panel *ngIf="mode>0" [mode]="mode" [device]="editedDevice" (cancelEmitter)="setNoneMode()" (saveEmitter)="save($event)"></app-device-edit-panel>
+            <app-device-edit-panel *ngIf="mode>0 && mode<3" [mode]="mode" [device]="editedDevice" (cancelEmitter)="setNoneMode()" (saveEmitter)="save($event)"></app-device-edit-panel>
+            <app-subscription-panel *ngIf="mode==3"  [subscriptionGroups]="subscriptionGroups "
+             (closeEmitter)="setNoneMode()"
+             (refreshGroup)="refreshSubscriptionGroup()"
+             (addGroup)="openGroupDialog()"
+             ></app-subscription-panel>
         </div>
         
     </div>

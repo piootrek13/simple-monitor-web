@@ -13,6 +13,9 @@ import { MatIconModule} from '@angular/material/icon';
 import { MatInputModule} from '@angular/material/input';
 import { MatBadgeModule} from '@angular/material/badge';
 import { MatCheckboxModule} from '@angular/material/checkbox';
+import { MatTabsModule} from '@angular/material/tabs';
+import { MatSelectModule} from '@angular/material/select';
+import { MatListModule} from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +24,8 @@ import { DevicePanelComponent } from './device-panel/device-panel.component';
 import { HttpClient } from '@angular/common/http';
 import { DeviceEditPanelComponent } from './device-edit-panel/device-edit-panel.component';
 import { RemoveDialogComponent } from './remove-dialog/remove-dialog.component';
+import { SubscriptionPanelComponent } from './subscription-panel/subscription-panel.component';
+import { GroupDialogComponent } from './group-dialog/group-dialog.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
  ];
@@ -30,7 +35,9 @@ const routes: Routes = [
     HomeComponent,
     DevicePanelComponent,
     DeviceEditPanelComponent,
-    RemoveDialogComponent
+    RemoveDialogComponent,
+    SubscriptionPanelComponent,
+    GroupDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +51,12 @@ const routes: Routes = [
     MatBadgeModule,
     MatDialogModule,
     MatMenuModule,
+    MatListModule,
     MatIconModule,
     MatInputModule,
     MatInputModule,
+    MatSelectModule,
+    MatTabsModule,
     HttpClientModule,
     MatCheckboxModule,
     RouterModule.forRoot(routes)

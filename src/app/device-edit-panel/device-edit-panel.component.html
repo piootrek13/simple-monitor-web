@@ -3,7 +3,7 @@
         <span color="primary"  class="{{mode == 1 ? 'icon-plus' : 'icon-pencil'}}"> {{mode == 1 ? 'Nowe urządzenie' : 'Edytuj'}}</span>
    </mat-card-title>
    <mat-card-content class="m-4">
-    <mat-checkbox class="my-3" color="primary" [(ngModel)]="device.active">Aktywny</mat-checkbox>
+    <mat-checkbox style="width: 100%;" class="my-3" color="primary" [(ngModel)]="device.active">Aktywny</mat-checkbox>
 
     <mat-form-field class="edit-field" appearance="fill">
         <mat-label>Nawa</mat-label>
