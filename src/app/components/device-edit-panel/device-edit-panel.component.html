@@ -13,6 +13,13 @@
         <mat-label>Adres IP</mat-label>
         <input matInput  [(ngModel)]="device.ip">
     </mat-form-field>
+    <mat-form-field class="edit-field" appearance="fill">
+        <mat-label>Grupa subskrypcji</mat-label>
+        <mat-select [(value)]="selectedGroup" (valueChange)="onGroupSelect()">
+          <mat-option [value]="emptySubscriptionGroup">{{emptySubscriptionGroup.name}}</mat-option>
+          <mat-option *ngFor="let sg of subscriptionGroups" [value]="sg">{{sg.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">
         <button  mat-button color="primary"><span class="icon-floppy" (click)="saveEmit()">Zapisz</span></button>

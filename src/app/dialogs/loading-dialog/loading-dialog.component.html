@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{loadingData.title}}</h2>
+<mat-dialog-content>
+    <div class="d-flex">
+        <mat-spinner *ngIf="loadingData.state == 0" class="me-1" [diameter]="20"></mat-spinner>
+        <mat-icon class="me-1" color="warn" *ngIf="loadingData.state < 0">error</mat-icon>
+        <mat-icon class="me-1" style="color: green;" *ngIf="loadingData.state > 0">check_circle</mat-icon>
+        <span class="py-1" [style]="loadingData.state < 0 ? 'color: red;' : ''">{{loadingData.text}}</span>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Zamknij</button>
+</mat-dialog-actions>

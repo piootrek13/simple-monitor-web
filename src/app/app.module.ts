@@ -17,6 +17,7 @@ import { MatTabsModule} from '@angular/material/tabs';
 import { MatSelectModule} from '@angular/material/select';
 import { MatListModule} from '@angular/material/list';
 import { MatTableModule} from '@angular/material/table';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,8 @@ import { RemoveDialogComponent } from './dialogs/remove-dialog/remove-dialog.com
 import { SubscriptionPanelComponent } from './components/subscription-panel/subscription-panel.component';
 import { GroupDialogComponent } from './dialogs/group-dialog/group-dialog.component';
 import { EmailSubDialogComponent } from './dialogs/email-sub-dialog/email-sub-dialog.component';
+import { SendEmailDialogComponent } from './dialogs/send-email-dialog/send-email-dialog.component';
+import { LoadingDialogComponent } from './dialogs/loading-dialog/loading-dialog.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
  ];
@@ -40,7 +43,9 @@ const routes: Routes = [
     RemoveDialogComponent,
     SubscriptionPanelComponent,
     GroupDialogComponent,
-    EmailSubDialogComponent
+    EmailSubDialogComponent,
+    SendEmailDialogComponent,
+    LoadingDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +65,7 @@ const routes: Routes = [
     MatInputModule,
     MatSelectModule,
     MatTableModule,
+    MatProgressSpinnerModule,
     MatTabsModule,
     HttpClientModule,
     MatCheckboxModule,

@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Wiadomość testowa</h2>
+<mat-dialog-content>
+
+    <mat-form-field class="edit-field" style="width: 100%;" appearance="fill">
+        <mat-label>Do:</mat-label>
+        <input matInput  [(ngModel)]="email.to">
+    </mat-form-field> 
+
+    <mat-form-field class="edit-field" style="width: 100%;" appearance="fill">
+        <mat-label>Temat:</mat-label>
+        <input matInput  [(ngModel)]="email.subject">
+    </mat-form-field> 
+    <mat-form-field class="edit-field" style="width: 100%;" appearance="fill">
+        <mat-label>Wiadomość</mat-label>
+        <textarea style="height: 150px;" matInput [(ngModel)]="email.text"></textarea>
+    </mat-form-field> 
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Anuluj</button>
+  <button mat-stroked-button color="primary" [mat-dialog-close]="email" cdkFocusInitial><mat-icon class="me-1">send</mat-icon>Wyślij</button>
+</mat-dialog-actions>

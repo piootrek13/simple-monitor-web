@@ -35,7 +35,13 @@
             </ul>
         </div>
         <div class="col-6">
-            <app-device-edit-panel *ngIf="mode>0 && mode<3" [mode]="mode" [device]="editedDevice" (cancelEmitter)="setNoneMode()" (saveEmitter)="save($event)"></app-device-edit-panel>
+            <app-device-edit-panel *ngIf="mode>0 && mode<3" 
+                [mode]="mode" 
+                [device]="editedDevice" 
+                [subscriptionGroups]="subscriptionGroups" 
+                (cancelEmitter)="setNoneMode()" 
+                (saveEmitter)="save($event)">
+            </app-device-edit-panel>
             <app-subscription-panel *ngIf="mode==3"  [subscriptionGroups]="subscriptionGroups " [subscriptions]="viewedSubscriptions"
              (closeEmitter)="setNoneMode()"
              (refreshGroup)="refreshSubscriptionGroup()"
@@ -43,6 +49,7 @@
              (addSubscriptionEmitter)="openEmailSubDialog($event)"
              (removeSubscriptionEmitter)="removeEmailSubscription($event)"
              (editSubscriptionEmitter)="editEmailSubscription($event)"
+             (sendMailEmitter)="sendTestMail($event)"
              (addGroup)="openGroupDialog()"
              ></app-subscription-panel>
         </div>

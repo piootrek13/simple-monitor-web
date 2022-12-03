@@ -29,6 +29,7 @@ export class Device{
   ip="";
   counter=0;
   state=0;
-  silenced = false
-  active = true
+  silenced = false;
+  active = true;
+  subscriptionGroup = 0;
 }

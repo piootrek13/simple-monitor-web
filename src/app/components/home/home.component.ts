@@ -9,6 +9,9 @@ import { GroupDialogComponent } from '../../dialogs/group-dialog/group-dialog.co
 import { RemoveDialogComponent } from '../../dialogs/remove-dialog/remove-dialog.component';
 import { SubscriptionGroup, SubscriptionGroupService } from '../../services/subscription-group.service';
 import { EmailSubDialogComponent } from 'src/app/dialogs/email-sub-dialog/email-sub-dialog.component';
+import { SendEmailDialogComponent } from 'src/app/dialogs/send-email-dialog/send-email-dialog.component';
+import { EmailService } from 'src/app/services/email.service';
+import { LoadingData, LoadingDialogComponent } from 'src/app/dialogs/loading-dialog/loading-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +28,7 @@ export class HomeComponent implements OnInit {
   deviceService: DeviceService;
   subscriptionGroupService: SubscriptionGroupService;
   emailSubscriptionService: EmailSubscriptionService;
+  emailService: EmailService;
   checkSubscription: Subscription = new Subscription;
   devices: Device[] = [];
   checkingStates = false;
@@ -36,6 +40,7 @@ export class HomeComponent implements OnInit {
     this.deviceService = new DeviceService(httpClient);
     this.subscriptionGroupService = new SubscriptionGroupService(httpClient);
     this.emailSubscriptionService = new EmailSubscriptionService(httpClient);
+    this.emailService = new EmailService(httpClient);
    }
   ngOnDestroy(): void {
     this.checkSubscription.unsubscribe();
@@ -102,6 +107,8 @@ export class HomeComponent implements OnInit {
     let request;
     if(device.id>0) request = this.deviceService.editDevice(device);
     else request = this.deviceService.addDevice(device);
+    console.log(device);
+    
     request.pipe(
       catchError(error => { 
         this.checkingStates=false;
@@ -142,6 +149,7 @@ export class HomeComponent implements OnInit {
   setNewMode(){
     this.mode = HomeComponent.MODE_NEW;
     this.editedDevice = new Device();
+    this.refreshSubscriptionGroup();
   }
   setSubscriptionsMode(){
     this.mode = HomeComponent.MODE_SUBSCRIPTION;
@@ -156,6 +164,8 @@ export class HomeComponent implements OnInit {
     this.editedDevice.state = device.state;
     this.editedDevice.silenced = device.silenced;
     this.editedDevice.active = device.active;
+    this.editedDevice.subscriptionGroup = device.subscriptionGroup;
+    this.refreshSubscriptionGroup();
   }
   setSilenced(device: Device){
     this.checkingStates=true;
@@ -264,6 +274,37 @@ export class HomeComponent implements OnInit {
             this.viewedSubscriptions = data;
           }
         );
+      }
+    });
+  }
+
+  sendTestMail(to: any){
+    const dialogRef = this.dialog.open(SendEmailDialogComponent, {data:{to: to}});
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        let loadingData = new LoadingData();
+        loadingData.title="e-mail";
+        loadingData.text="wysyłanie...";
+        this.openLoading(loadingData);
+        this.emailService.post(result).pipe(
+          catchError(error => { 
+            loadingData.text = "Błąd wysyłania wiadomości";
+            loadingData.state = -1;
+            return throwError(error); 
+          })
+        ).subscribe(
+          data=>{
+            loadingData.text = "Wysłano wiadomość";
+            loadingData.state = 1;
+          }
+        );     
+      }
+    });
+  }
+  openLoading(loadingData: LoadingData){
+    const dialogRef = this.dialog.open(LoadingDialogComponent, {data:{loadingData: loadingData}});
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){ 
       }
     });
   }

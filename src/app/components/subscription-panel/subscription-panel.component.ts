@@ -16,6 +16,7 @@ export class SubscriptionPanelComponent implements OnInit, OnChanges {
   @Output() addSubscriptionEmitter = new EventEmitter<EmailSubscription>();
   @Output() removeSubscriptionEmitter = new EventEmitter<EmailSubscription>();
   @Output() editSubscriptionEmitter = new EventEmitter<EmailSubscription>();
+  @Output() sendMailEmitter = new EventEmitter<string>();
   @Output() closeEmitter = new EventEmitter();
   @Output() refreshEmailSubs = new EventEmitter<number>();
   selGroup = new SubscriptionGroup();
