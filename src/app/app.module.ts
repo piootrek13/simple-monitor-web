@@ -16,16 +16,18 @@ import { MatCheckboxModule} from '@angular/material/checkbox';
 import { MatTabsModule} from '@angular/material/tabs';
 import { MatSelectModule} from '@angular/material/select';
 import { MatListModule} from '@angular/material/list';
+import { MatTableModule} from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { DevicePanelComponent } from './device-panel/device-panel.component';
+import { HomeComponent } from './components/home/home.component';
+import { DevicePanelComponent } from './components/device-panel/device-panel.component';
 import { HttpClient } from '@angular/common/http';
-import { DeviceEditPanelComponent } from './device-edit-panel/device-edit-panel.component';
-import { RemoveDialogComponent } from './remove-dialog/remove-dialog.component';
-import { SubscriptionPanelComponent } from './subscription-panel/subscription-panel.component';
-import { GroupDialogComponent } from './group-dialog/group-dialog.component';
+import { DeviceEditPanelComponent } from './components/device-edit-panel/device-edit-panel.component';
+import { RemoveDialogComponent } from './dialogs/remove-dialog/remove-dialog.component';
+import { SubscriptionPanelComponent } from './components/subscription-panel/subscription-panel.component';
+import { GroupDialogComponent } from './dialogs/group-dialog/group-dialog.component';
+import { EmailSubDialogComponent } from './dialogs/email-sub-dialog/email-sub-dialog.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
  ];
@@ -37,7 +39,8 @@ const routes: Routes = [
     DeviceEditPanelComponent,
     RemoveDialogComponent,
     SubscriptionPanelComponent,
-    GroupDialogComponent
+    GroupDialogComponent,
+    EmailSubDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ const routes: Routes = [
     MatInputModule,
     MatInputModule,
     MatSelectModule,
+    MatTableModule,
     MatTabsModule,
     HttpClientModule,
     MatCheckboxModule,

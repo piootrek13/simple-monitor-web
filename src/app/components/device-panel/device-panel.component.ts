@@ -1,6 +1,6 @@
 import { outputAst } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Device } from '../device.service';
+import { Device } from '../../services/device.service';
 
 @Component({
   selector: 'app-device-panel',

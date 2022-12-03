@@ -3,11 +3,12 @@ import { Conditional } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError, map, Subscription, throwError, timer } from 'rxjs';
-import { Device, DeviceService } from '../device.service';
-import { EmailSubscriptionService } from '../email-subscription.service';
-import { GroupDialogComponent } from '../group-dialog/group-dialog.component';
-import { RemoveDialogComponent } from '../remove-dialog/remove-dialog.component';
-import { SubscriptionGroup, SubscriptionGroupService } from '../subscription-group.service';
+import { Device, DeviceService } from '../../services/device.service';
+import { EmailSubscription, EmailSubscriptionService } from '../../services/email-subscription.service';
+import { GroupDialogComponent } from '../../dialogs/group-dialog/group-dialog.component';
+import { RemoveDialogComponent } from '../../dialogs/remove-dialog/remove-dialog.component';
+import { SubscriptionGroup, SubscriptionGroupService } from '../../services/subscription-group.service';
+import { EmailSubDialogComponent } from 'src/app/dialogs/email-sub-dialog/email-sub-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit {
   alertCount = 0;
   alerting=false;
   subscriptionGroups: SubscriptionGroup[] = [];
+  viewedSubscriptions: EmailSubscription[]=[];
   constructor(private httpClient: HttpClient, private dialog: MatDialog) {
     this.deviceService = new DeviceService(httpClient);
     this.subscriptionGroupService = new SubscriptionGroupService(httpClient);
@@ -199,7 +201,71 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-  refreshEmailSubs(group: number){
-    
+  refreshEmailSubs(group: any){
+    this.emailSubscriptionService.getSubsByGroup(group).pipe(
+      catchError(error => { 
+                return throwError(error); 
+      })
+    ).subscribe(
+      data=>{
+        this.viewedSubscriptions = data;
+      }
+    );
   }
+  openEmailSubDialog(emailSubscription: any){
+    console.log(emailSubscription);
+    const dialogRef = this.dialog.open(EmailSubDialogComponent, {data:{emailSubscription: emailSubscription}});
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        console.log(result);
+        
+        this.emailSubscriptionService.post(result).pipe(
+          catchError(error => { 
+                    return throwError(error); 
+          })
+        ).subscribe(
+          data=>{
+            this.viewedSubscriptions = data;
+          }
+        );
+      }
+    });
+  }
+
+  editEmailSubscription(emailSubscription: any){
+    const dialogRef = this.dialog.open(EmailSubDialogComponent, {data:{emailSubscription: emailSubscription}});
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){        
+        this.emailSubscriptionService.put(result).pipe(
+          catchError(error => { 
+                    return throwError(error); 
+          })
+        ).subscribe(
+          data=>{
+            this.viewedSubscriptions = data;
+          }
+        );
+      }
+    });
+  }
+
+  removeEmailSubscription(emailSubscription: EmailSubscription){
+    const dialogRef = this.dialog.open(RemoveDialogComponent, {data:{name: emailSubscription.name}});
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.checkingStates = true;
+        this.emailSubscriptionService.delete(emailSubscription.id).pipe(
+          catchError(error => { 
+            this.checkingStates=false;
+            return throwError(error); 
+          })
+        ).subscribe(
+          data=>{
+            this.viewedSubscriptions = data;
+          }
+        );
+      }
+    });
+  }
+
 }

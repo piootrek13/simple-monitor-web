@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Device } from '../device.service';
+import { Device } from '../../services/device.service';
 import { HomeComponent } from '../home/home.component';
 
 @Component({

@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content>
+
+    <mat-form-field class="edit-field" style="width: 100%;" appearance="fill">
+        <mat-label>Nawa</mat-label>
+        <input matInput  [(ngModel)]="emailSubscription.name">
+    </mat-form-field> 
+    <mat-form-field class="edit-field" style="width: 100%;" appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input matInput  [(ngModel)]="emailSubscription.email">
+    </mat-form-field> 
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Anuluj</button>
+  <button mat-stroked-button color="primary" [mat-dialog-close]="emailSubscription" cdkFocusInitial>{{emailSubscription.id>0 ? 'Edytuj' : 'Dodaj'}}</button>
+</mat-dialog-actions>

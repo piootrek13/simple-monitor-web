@@ -1,7 +1,7 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SubscriptionGroup } from '../subscription-group.service';
+import { SubscriptionGroup } from 'src/app/services/subscription-group.service';
 
 @Component({
   selector: 'app-group-dialog',
