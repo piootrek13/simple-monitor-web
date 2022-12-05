@@ -19,6 +19,7 @@ export class DevicePanelComponent implements OnInit {
   }
 
   editEmit(){
+    
     this.editEmitter.emit(this.device);
   }
   removeEmit(){

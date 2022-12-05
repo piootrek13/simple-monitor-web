@@ -20,8 +20,10 @@ export class DeviceEditPanelComponent implements OnInit, OnChanges {
 
   constructor() {
     this.emptySubscriptionGroup.name = "<Brak>";
+    this.emptySubscriptionGroup.id = 0;
    }
   ngOnChanges(changes: SimpleChanges): void {
+    this.selectedGroup = this.emptySubscriptionGroup;
     if(changes['subscriptionGroups'] || changes['device']){
       for(let sg of this.subscriptionGroups){
         if(sg.id == this.device.subscriptionGroup){
@@ -33,15 +35,8 @@ export class DeviceEditPanelComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.selectedGroup == this.emptySubscriptionGroup;
+  }
 
-  }
-  saveEmit(){    
-    this.saveEmitter.emit(this.device);
-  }
-  cancelEmit(){
-    this.cancelEmitter.emit();
-  }
   onGroupSelect(){
     this.device.subscriptionGroup = this.selectedGroup.id;
   }

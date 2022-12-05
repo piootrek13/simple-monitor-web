@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
     ).subscribe();
   }
   checkDiffrence(ds: Device[]): boolean{
+
     if(ds.length!=this.devices.length) return false;
     for(let i=0; i<this.devices.length; i++){
       if(ds[i].name!=this.devices[i].name ||
@@ -65,7 +66,8 @@ export class HomeComponent implements OnInit {
         ds[i].ip!=this.devices[i].ip ||
         ds[i].active!=this.devices[i].active ||
         ds[i].silenced!=this.devices[i].silenced ||
-        ds[i].state!=this.devices[i].state) return false;
+        ds[i].state!=this.devices[i].state ||
+        ds[i].subscriptionGroup != this.devices[i].subscriptionGroup) return false;
     }
     return true; 
   }
@@ -93,7 +95,7 @@ export class HomeComponent implements OnInit {
     this.alertCount = 0;
     this.alerting=false;
     this.devices.forEach(d=>{
-      if(d.state!=0){
+      if(d.state!=0 && d.active){
         this.alertCount++;
         if(!d.silenced){
            this.alerting = true;
@@ -106,9 +108,7 @@ export class HomeComponent implements OnInit {
 
     let request;
     if(device.id>0) request = this.deviceService.editDevice(device);
-    else request = this.deviceService.addDevice(device);
-    console.log(device);
-    
+    else request = this.deviceService.addDevice(device);    
     request.pipe(
       catchError(error => { 
         this.checkingStates=false;
@@ -143,6 +143,7 @@ export class HomeComponent implements OnInit {
     });
   }
   setNoneMode(){
+    
     this.mode = HomeComponent.MODE_NONE;
 
   }
@@ -154,7 +155,7 @@ export class HomeComponent implements OnInit {
   setSubscriptionsMode(){
     this.mode = HomeComponent.MODE_SUBSCRIPTION;
   }
-  setEditMode(device: Device){
+  setEditMode(device: Device){    
     this.mode = HomeComponent.MODE_EDIT;
     this.editedDevice = new Device();
     this.editedDevice.id = device.id;
@@ -198,7 +199,6 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(GroupDialogComponent,  {data:{groups: this.subscriptionGroups}});
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        console.log(result);
         this.subscriptionGroupService.postGroup(result).pipe(
           catchError(error => { 
                     return throwError(error); 
@@ -223,12 +223,9 @@ export class HomeComponent implements OnInit {
     );
   }
   openEmailSubDialog(emailSubscription: any){
-    console.log(emailSubscription);
     const dialogRef = this.dialog.open(EmailSubDialogComponent, {data:{emailSubscription: emailSubscription}});
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        console.log(result);
-        
+      if(result){        
         this.emailSubscriptionService.post(result).pipe(
           catchError(error => { 
                     return throwError(error); 
