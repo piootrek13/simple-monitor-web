@@ -16,7 +16,9 @@ import { MatCheckboxModule} from '@angular/material/checkbox';
 import { MatTabsModule} from '@angular/material/tabs';
 import { MatSelectModule} from '@angular/material/select';
 import { MatListModule} from '@angular/material/list';
+import { MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatTableModule} from '@angular/material/table';
+import { MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +33,8 @@ import { GroupDialogComponent } from './dialogs/group-dialog/group-dialog.compon
 import { EmailSubDialogComponent } from './dialogs/email-sub-dialog/email-sub-dialog.component';
 import { SendEmailDialogComponent } from './dialogs/send-email-dialog/send-email-dialog.component';
 import { LoadingDialogComponent } from './dialogs/loading-dialog/loading-dialog.component';
+import { HistoryPanelComponent } from './components/history-panel/history-panel.component';
+import { PaginatorConfig } from './configurations/PaginatorConfig';
 const routes: Routes = [
   {path: '', component: HomeComponent},
  ];
@@ -45,7 +49,8 @@ const routes: Routes = [
     GroupDialogComponent,
     EmailSubDialogComponent,
     SendEmailDialogComponent,
-    LoadingDialogComponent
+    LoadingDialogComponent,
+    HistoryPanelComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +69,8 @@ const routes: Routes = [
     MatInputModule,
     MatInputModule,
     MatSelectModule,
+    MatButtonToggleModule,
+    MatPaginatorModule,
     MatTableModule,
     MatProgressSpinnerModule,
     MatTabsModule,
@@ -71,7 +78,9 @@ const routes: Routes = [
     MatCheckboxModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    {provide: MatPaginatorIntl, useValue: PaginatorConfig()}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

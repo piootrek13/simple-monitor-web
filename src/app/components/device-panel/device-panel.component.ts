@@ -12,6 +12,7 @@ export class DevicePanelComponent implements OnInit {
   @Output() editEmitter = new EventEmitter<Device>();
   @Output() removeEmitter = new EventEmitter<Device>();
   @Output() setSilencedEmitter = new EventEmitter<Device>();
+  @Output() showHistoryEmitter = new EventEmitter<Device>();
   constructor() { }
 
   ngOnInit(): void {

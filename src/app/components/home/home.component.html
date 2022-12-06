@@ -12,7 +12,12 @@
         <button mat-menu-item  (click)="setSubscriptionsMode()">
             <mat-icon>speaker_notes</mat-icon>
             <span>Subskrypcje</span>
-          </button>
+        </button>
+
+        <button mat-menu-item  (click)="setHistoryMode()">
+            <mat-icon>history</mat-icon>
+            <span>Historia</span>
+        </button>
     </mat-menu>
     <span>Monitor</span>
     <span style="flex: 1 1 auto;"></span>
@@ -33,7 +38,9 @@
                     <app-device-panel [device]="d" 
                     (editEmitter)="setEditMode($event)" 
                     (removeEmitter)="remove($event)" 
-                    (setSilencedEmitter)="setSilenced($event)"></app-device-panel>
+                    (showHistoryEmitter)="showHistoryOfDevice($event)"
+                    (setSilencedEmitter)="setSilenced($event)">
+                </app-device-panel>
                 </li>
             </ul>
         </div>
@@ -42,11 +49,11 @@
                 [mode]="mode" 
                 [device]="editedDevice" 
                 [subscriptionGroups]="subscriptionGroups" 
-                (cancelEmitter)="setNoneMode()" 
+                (cancelEmitter)="setHistoryMode()" 
                 (saveEmitter)="save($event)">
             </app-device-edit-panel>
             <app-subscription-panel *ngIf="mode==3"  [subscriptionGroups]="subscriptionGroups " [subscriptions]="viewedSubscriptions"
-             (closeEmitter)="setNoneMode()"
+             (closeEmitter)="setHistoryMode()"
              (refreshGroup)="refreshSubscriptionGroup()"
              (refreshEmailSubs)="refreshEmailSubs($event)"
              (addSubscriptionEmitter)="openEmailSubDialog($event)"
@@ -55,6 +62,10 @@
              (sendMailEmitter)="sendTestMail($event)"
              (addGroup)="openGroupDialog()"
              ></app-subscription-panel>
+             <app-history-panel *ngIf="mode==4"
+             [data]="viewedEvents"
+             [viewedDevice]="viewedDevice"
+             (showAllEmitter)="showHistory()"></app-history-panel>
         </div>
         
     </div>

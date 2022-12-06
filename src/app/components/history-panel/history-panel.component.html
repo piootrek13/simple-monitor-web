@@ -1,0 +1,40 @@
+<mat-card class="p-4">
+    <mat-card-title class="">
+        Historia {{viewedDevice.name}}
+   </mat-card-title>
+   <mat-card-content class="mt-4 mb-1">
+    <div align="end" class="mx-3" style="height: 40px;">
+      <button *ngIf="viewedDevice.id>-1" mat-button color="primary" (click)="showAllEmitter.emit()"><span>Pokaż wszystkie</span></button>
+
+    </div>
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8 mx-3 mb-3">
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.date}} </mat-cell>
+        </ng-container>
+      
+        <ng-container matColumnDef="device_name">
+          <mat-header-cell *matHeaderCellDef> Urządzenie </mat-header-cell>
+          <mat-cell *matCellDef="let element" > {{element.deviceName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="event_text">
+            <mat-header-cell *matHeaderCellDef> Zdarzenie </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.eventCode==0" class="me-1 good">check</mat-icon>
+              <mat-icon *ngIf="element.eventCode!=0" class="me-1 not-good">priority_high</mat-icon>
+              {{element.eventText}} 
+            </mat-cell>
+          </ng-container>
+
+        <mat-header-row *matHeaderRowDef="['date', 'device_name', 'event_text']; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['date', 'device_name', 'event_text'];"></mat-row>
+      </mat-table>
+      <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements">
+      </mat-paginator>
+   </mat-card-content>
+   <mat-card-actions align="end">
+ </mat-card-actions>
+</mat-card>

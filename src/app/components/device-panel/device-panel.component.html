@@ -21,7 +21,7 @@
 
      </mat-card-content>
      <mat-card-actions align="end">
-          <button  mat-button><span class="icon-clock" >Historia</span></button>
+          <button  mat-button (click)="showHistoryEmitter.emit(device)"><span class="icon-clock" >Historia</span></button>
           <button  mat-button color="primary" (click)="editEmit()"><span class="icon-pencil" >Edytuj</span></button>
           <button  mat-button color="warn" (click)="removeEmit()"><span class="icon-trash-empty" >Usuń</span></button>
      </mat-card-actions>

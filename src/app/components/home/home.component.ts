@@ -12,6 +12,7 @@ import { EmailSubDialogComponent } from 'src/app/dialogs/email-sub-dialog/email-
 import { SendEmailDialogComponent } from 'src/app/dialogs/send-email-dialog/send-email-dialog.component';
 import { EmailService } from 'src/app/services/email.service';
 import { LoadingData, LoadingDialogComponent } from 'src/app/dialogs/loading-dialog/loading-dialog.component';
+import { EventService, DeviceEvent } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-home',
@@ -19,42 +20,44 @@ import { LoadingData, LoadingDialogComponent } from 'src/app/dialogs/loading-dia
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  static readonly MODE_NONE = 0;
   static readonly MODE_NEW = 1;
   static readonly MODE_EDIT = 2;
   static readonly MODE_SUBSCRIPTION = 3;
-  mode = HomeComponent.MODE_NONE;
+  static readonly MODE_HISTORY = 4;
+  mode = HomeComponent.MODE_HISTORY;
+  viewedDevice = new Device();
   editedDevice = new Device();
   deviceService: DeviceService;
   subscriptionGroupService: SubscriptionGroupService;
   emailSubscriptionService: EmailSubscriptionService;
   emailService: EmailService;
+  eventService: EventService;
   checkSubscription: Subscription = new Subscription;
   devices: Device[] = [];
   checkingStates = false;
   alertCount = 0;
   alerting=false;
   subscriptionGroups: SubscriptionGroup[] = [];
-  viewedSubscriptions: EmailSubscription[]=[];
+  viewedSubscriptions: EmailSubscription[] = [];
+  viewedEvents: DeviceEvent[] = [];
   constructor(private httpClient: HttpClient, private dialog: MatDialog) {
     this.deviceService = new DeviceService(httpClient);
     this.subscriptionGroupService = new SubscriptionGroupService(httpClient);
     this.emailSubscriptionService = new EmailSubscriptionService(httpClient);
     this.emailService = new EmailService(httpClient);
+    this.eventService = new EventService(httpClient);
    }
   ngOnDestroy(): void {
     this.checkSubscription.unsubscribe();
   }
   ngOnInit(): void {
-    // for(let i=0; i<10; i++){
-    //   this.names.push("NUMER: "+i.toString())
-    // }
     this.checkSubscription = timer(0, 1000).pipe( 
       map(() => { 
         if(!this.checkingStates) this.checkStates(); 
         this.checkingStates = true;
       }) 
     ).subscribe();
+    this.showHistory();
   }
   checkDiffrence(ds: Device[]): boolean{
 
@@ -76,6 +79,7 @@ export class HomeComponent implements OnInit {
     if(!this.checkDiffrence(data)){
       this.devices = data;
       this.setAlertCount();
+      this.refreshViewedEvents(this.viewedDevice.id);
     }
   }
   checkStates(){
@@ -120,7 +124,8 @@ export class HomeComponent implements OnInit {
         this.checkingStates = false;
       }
     );
-    this.setNoneMode();
+    this.mode = HomeComponent.MODE_HISTORY;
+
   }
   remove(device: Device){
     const dialogRef = this.dialog.open(RemoveDialogComponent, {data:{name: device.name}});
@@ -138,13 +143,13 @@ export class HomeComponent implements OnInit {
             this.checkingStates = false;
           }
         );
-        this.setNoneMode();
+        this.mode = HomeComponent.MODE_HISTORY;
       }
     });
   }
-  setNoneMode(){
+  setHistoryMode(){
     
-    this.mode = HomeComponent.MODE_NONE;
+    this.mode = HomeComponent.MODE_HISTORY;
 
   }
   setNewMode(){
@@ -304,6 +309,28 @@ export class HomeComponent implements OnInit {
       if(result){ 
       }
     });
+  }
+  showHistoryOfDevice(device: any){
+    this.viewedDevice = device;
+    this.mode=HomeComponent.MODE_HISTORY;
+    this.refreshViewedEvents(device.id)
+  }
+  showHistory(){
+    let device = new Device();
+    device.id = -1;
+    this.showHistoryOfDevice(device);
+  }
+  refreshViewedEvents(device: any){
+    this.viewedEvents = [];
+    this.eventService.getEventsByDevice(device).pipe(
+      catchError(error => { 
+        return throwError(error); 
+      })
+    ).subscribe(
+      data=>{
+        this.viewedEvents = data;        
+      }
+    );   
   }
 
 }
