@@ -1,5 +1,6 @@
 <mat-card>
-    <mat-card-title>
+    <mat-card-title color="primary">
+        <mat-icon class="me-2">speaker_notes</mat-icon>
         Subskrypcje
    </mat-card-title>
    <mat-card-content>
@@ -13,21 +14,7 @@
                         </mat-select>
                     </mat-form-field>
                     <button (click)="addGroup.emit()" color="primary" class="float-end my-2"  mat-button> <mat-icon class="me-1">group_add</mat-icon>  <span>Dodaj grupę</span></button>
-                </div>
-                <!-- <mat-list>
-                    <div mat-subheader>Subskrybenci</div>
-                    <mat-list-item style="width: 100%;" class="my-4" *ngFor="let subscription of subscriptions">
-                         <mat-form-field class="edit-field" appearance="fill">
-                              <mat-label>Nazwa</mat-label>
-                              <input matInput  [(ngModel)]="subscription.name">
-                          </mat-form-field>
-                          <mat-form-field class="edit-field" appearance="fill">
-                              <mat-label>E-mail</mat-label>
-                              <input matInput  [(ngModel)]="subscription.email">
-                          </mat-form-field>
-                    </mat-list-item>
-               </mat-list> -->
-               
+                </div>               
                <mat-table [dataSource]="subscriptions" class="mat-elevation-z8 mx-3">
                 <ng-container matColumnDef="name">
                   <mat-header-cell *matHeaderCellDef> Nazwa </mat-header-cell>

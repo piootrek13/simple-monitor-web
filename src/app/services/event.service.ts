@@ -15,7 +15,7 @@ export class EventService extends HttpService {
 
 export class DeviceEvent{
   id=0;
-  date = Date.now();
+  date = "";
   eventText ="";
   eventCode =0;
   deviceId=0;

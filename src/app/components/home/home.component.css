@@ -6,11 +6,22 @@
     
     0%{
         
-        color: black;
+        color: white;
     }
     50%{
         color: red;
         
     }
     
+}
+.toolbar-button{
+    font-weight:lighter;
+    color: lightgray;
+}
+.toolbar-button:hover{
+    color: white;
+}
+.toolbar-title{
+    display: flex;
+    align-items: center;
 }

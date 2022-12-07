@@ -22,13 +22,12 @@ export class HistoryPanelComponent implements OnInit, OnChanges, AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-  
+    
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.dataSource = new MatTableDataSource<DeviceEvent>(this.data);
     this.dataSource.paginator = this.paginator;
-
   }
   ngOnInit(): void {
   }

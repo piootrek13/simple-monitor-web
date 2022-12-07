@@ -1,8 +1,9 @@
-<mat-card class="p-4">
+<mat-card>
     <mat-card-title class="">
+      <mat-icon class="me-1">history</mat-icon>
         Historia {{viewedDevice.name}}
    </mat-card-title>
-   <mat-card-content class="mt-4 mb-1">
+   <mat-card-content class="m-4">
     <div align="end" class="mx-3" style="height: 40px;">
       <button *ngIf="viewedDevice.id>-1" mat-button color="primary" (click)="showAllEmitter.emit()"><span>Pokaż wszystkie</span></button>
 
@@ -10,7 +11,7 @@
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8 mx-3 mb-3">
         <ng-container matColumnDef="date">
           <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
-          <mat-cell *matCellDef="let element" > {{element.date}} </mat-cell>
+          <mat-cell *matCellDef="let element" style="font-weight: bold;"> {{element.date}} </mat-cell>
         </ng-container>
       
         <ng-container matColumnDef="device_name">

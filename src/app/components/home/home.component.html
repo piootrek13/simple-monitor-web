@@ -1,27 +1,22 @@
 <p>
-    <mat-toolbar>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="setNewMode()">
-          <mat-icon>add icon</mat-icon>
-          <span>Dodaj urządzenie</span>
-        </button>
+    <mat-toolbar class="py-4" color="primary">
+    <h2 class="me-4 toolbar-title"><mat-icon class="me-1">visibility</mat-icon>Monitor urządzeń</h2>
+    <button mat-button class="ms-4 toolbar-button" (click)="setNewMode()">
+        <mat-icon>add icon</mat-icon>
+        <span>Dodaj urządzenie</span>
+      </button>
 
-        <button mat-menu-item  (click)="setSubscriptionsMode()">
-            <mat-icon>speaker_notes</mat-icon>
-            <span>Subskrypcje</span>
-        </button>
+      <button mat-button class="toolbar-button" (click)="setSubscriptionsMode()">
+          <mat-icon>speaker_notes</mat-icon>
+          <span>Subskrypcje</span>
+      </button>
 
-        <button mat-menu-item  (click)="setHistoryMode()">
-            <mat-icon>history</mat-icon>
-            <span>Historia</span>
-        </button>
-    </mat-menu>
-    <span>Monitor</span>
+      <button mat-button class="toolbar-button" (click)="setHistoryMode()">
+          <mat-icon>history</mat-icon>
+          <span>Historia</span>
+      </button>
     <span style="flex: 1 1 auto;"></span>
-    <div style="font-size: 16px;" class="me-4 icon-bell {{alerting ? 'status-error' : ''}}">
+    <div style="font-size: 16px; font-weight: lighter;" class="me-4 icon-bell {{alerting ? 'status-error' : ''}}">
         Aktywne alarmy
         <span style="font-size: 14px !important; font-weight: normal !important;" class="badge rounded-pill {{alertCount<1 ? 'bg-success' : 'bg-danger '}} ms-2">
           {{alertCount}}
@@ -36,11 +31,11 @@
             <ul>
                 <li *ngFor="let d of devices" style="list-style:none;" class="my-1">
                     <app-device-panel [device]="d" 
-                    (editEmitter)="setEditMode($event)" 
-                    (removeEmitter)="remove($event)" 
-                    (showHistoryEmitter)="showHistoryOfDevice($event)"
-                    (setSilencedEmitter)="setSilenced($event)">
-                </app-device-panel>
+                        (editEmitter)="setEditMode($event)" 
+                        (removeEmitter)="remove($event)" 
+                        (showHistoryEmitter)="showHistoryOfDevice($event)"
+                        (setSilencedEmitter)="setSilenced($event)">
+                    </app-device-panel>
                 </li>
             </ul>
         </div>

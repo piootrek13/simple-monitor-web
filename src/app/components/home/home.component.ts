@@ -63,23 +63,26 @@ export class HomeComponent implements OnInit {
 
     if(ds.length!=this.devices.length) return false;
     for(let i=0; i<this.devices.length; i++){
-      if(ds[i].name!=this.devices[i].name ||
-        ds[i].counter!=this.devices[i].counter ||
-        ds[i].id!=this.devices[i].id ||
-        ds[i].ip!=this.devices[i].ip ||
-        ds[i].active!=this.devices[i].active ||
-        ds[i].silenced!=this.devices[i].silenced ||
-        ds[i].state!=this.devices[i].state ||
+      if(ds[i].name != this.devices[i].name ||
+        ds[i].counter != this.devices[i].counter ||
+        ds[i].id != this.devices[i].id ||
+        ds[i].ip != this.devices[i].ip ||
+        ds[i].active != this.devices[i].active ||
+        ds[i].silenced != this.devices[i].silenced ||
+        ds[i].state != this.devices[i].state ||
         ds[i].subscriptionGroup != this.devices[i].subscriptionGroup) return false;
     }
     return true; 
   }
   newData(data:Device[]){
     
+    data = this.sortDevices(data);
     if(!this.checkDiffrence(data)){
       this.devices = data;
       this.setAlertCount();
       this.refreshViewedEvents(this.viewedDevice.id);
+
+      
     }
   }
   checkStates(){
@@ -330,7 +333,20 @@ export class HomeComponent implements OnInit {
       data=>{
         this.viewedEvents = data;        
       }
-    );   
+    );
+    
+  }
+  sortDevices(devsToSort: Device[]): Device[]{
+    let alertDevices: Device[] = [];
+    let okDevices: Device[] = [];
+    for(let d of devsToSort){
+      if(d.state==0) okDevices.push(d);
+      else alertDevices.push(d);
+    }
+    let devices = [];
+    devices.push(...alertDevices);
+    devices.push(...okDevices);
+    return devices;
   }
 
 }
