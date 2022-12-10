@@ -40,7 +40,7 @@
                     <app-device-panel  [device]="d" 
                         (editEmitter)="setEditMode($event)" 
                         (removeEmitter)="remove($event)" 
-                        (showHistoryEmitter)="showHistoryOfDevice($event)"
+                        (showHistoryEmitter)="showHistoryOfDevice($event, '')"
                         (setSilencedEmitter)="setSilenced($event)">
                     </app-device-panel>
                 </li>

@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit {
     if(!this.checkDiffrence(data)){
       this.devices = data;
       this.setAlertCount();
-      this.refreshViewedEvents(this.viewedDevice.id);
+      this.refreshViewedEvents(this.viewedDevice.id, "");
 
       
     }
@@ -325,19 +325,19 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-  showHistoryOfDevice(device: any){
+  showHistoryOfDevice(device: any, range: any){
     this.viewedDevice = device;
     this.mode=HomeComponent.MODE_HISTORY;
-    this.refreshViewedEvents(device.id)
+    this.refreshViewedEvents(device.id, range)
   }
   showHistory(){
     let device = new Device();
     device.id = -1;
-    this.showHistoryOfDevice(device);
+    this.showHistoryOfDevice(device, "");
   }
-  refreshViewedEvents(device: any){
+  refreshViewedEvents(device: any, range: any){
     this.viewedEvents = [];
-    this.eventService.getEventsByDevice(device).pipe(
+    this.eventService.getEventsByDevice(device, range).pipe(
       catchError(error => { 
         return throwError(error); 
       })
@@ -361,7 +361,7 @@ export class HomeComponent implements OnInit {
     return devices;
   }
   changeHistoryDateRange(range: any){
-    console.log(range);
+    this.refreshViewedEvents(this.viewedDevice.id, range);
     
   }
 }

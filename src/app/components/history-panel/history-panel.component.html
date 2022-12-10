@@ -10,13 +10,14 @@
     </div>
     <mat-form-field class="mx-3" appearance="outline">
       <mat-label>Zakres dat</mat-label>
-      <mat-date-range-input [rangePicker]="picker">
+      <mat-date-range-input #rangeInput [rangePicker]="picker">
         <input #dateStart matStartDate placeholder="Start date">
         <input #dateEnd matEndDate placeholder="End date" (dateChange)="dateRangeChange(dateStart, dateEnd)">
       </mat-date-range-input>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
+    <!-- <button  mat-button (click)="dateStart.value = dateEnd.value=''" ><mat-icon>refresh</mat-icon></button> -->
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8 mx-3 mb-3">
         <ng-container matColumnDef="date">
           <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
