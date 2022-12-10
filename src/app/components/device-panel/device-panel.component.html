@@ -1,4 +1,4 @@
-<mat-card  class="device-card {{!device.active ? 'device-inactive' : device.state==0 ? '' : device.silenced ? 'status-silenced' : 'status-error'}}" style="max-width: 600px;">
+<mat-card color="primary"  class="device-card {{!device.active ? 'device-inactive' : device.state==0 ? '' : device.silenced ? 'status-silenced' : 'status-error'}}" >
      <mat-card-title>
           <div>
                {{device.name}}
@@ -11,18 +11,18 @@
           {{device.ip}}
      </mat-card-subtitle>
 
-     <mat-card-content class="py-2">
-          <p style="color: dimgray;" *ngIf="!device.active" class="h6 my-2 me-4 icon-eye-off">   NIEAKTYWNY</p>
-          <div class="d-flex" *ngIf="device.active">
-               <p class="my-2 me-4 h6 {{device.state==0 ? 'icon-ok text-ok' : device.state<0 ? 'icon-unlink text-error' : 'icon-bell text-error'}} "> {{device.state==0 ? 'OK' : device.state<0 ? 'BRAK KOMUNIKACJI' : 'ALARM'}}</p>
-               <p *ngIf="device.state>=0"  class="my-2 me-2"> Wystąpienia alarmu: {{device.counter}}</p>
+     <mat-card-content class="">
+          <p style="color: dimgray;" *ngIf="!device.active" class="h6 me-4 icon-eye-off">   NIEAKTYWNY</p>
+          <div class="d-flex" style="align-items: baseline;" *ngIf="device.active">
+               <p class=" me-4 h6 {{device.state==0 ? 'icon-ok text-ok' : device.state<0 ? 'icon-unlink text-error' : 'icon-bell text-error'}} "> {{device.state==0 ? 'OK' : device.state<0 ? 'BRAK KOMUNIKACJI' : 'ALARM'}}</p>
+               <p *ngIf="device.state>=0"  class=" me-2"> Wystąpienia alarmu: {{device.counter}}</p>
                <button *ngIf="device.state>=0" mat-button>Zeruj</button>
           </div>
 
      </mat-card-content>
      <mat-card-actions align="end">
-          <button  mat-button (click)="showHistoryEmitter.emit(device)"><span class="icon-clock" >Historia</span></button>
-          <button  mat-button color="primary" (click)="editEmit()"><span class="icon-pencil" >Edytuj</span></button>
-          <button  mat-button color="warn" (click)="removeEmit()"><span class="icon-trash-empty" >Usuń</span></button>
+          <button  mat-button  (click)="showHistoryEmitter.emit(device)"><mat-icon class="me-1">history</mat-icon><span>Historia</span></button>
+          <button  mat-button  (click)="editEmit()"><mat-icon class="me-1">edit</mat-icon><span>Edytuj</span></button>
+          <button  mat-button color="warn" (click)="removeEmit()"><mat-icon class="me-1">delete</mat-icon><span>Usuń</span></button>
      </mat-card-actions>
 </mat-card>

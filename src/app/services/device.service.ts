@@ -7,19 +7,19 @@ import { HttpService } from './http.service';
 })
 export class DeviceService extends HttpService {
   getDevices(): Observable<Device[]>{
-    return this.http.get<Device[]>("http://"+this.host+":8080/devices", this.getOptions());
+    return this.http.get<Device[]>("http://"+this.host+":"+this.port+"/devices", this.getOptions());
   }
   editDevice(device: Device): Observable<Device[]>{
-    return this.http.put<Device[]>("http://"+this.host+":8080/devices",device, this.getOptions());
+    return this.http.put<Device[]>("http://"+this.host+":"+this.port+"/devices",device, this.getOptions());
   }
   addDevice(device: Device): Observable<Device[]>{
-    return this.http.post<Device[]>("http://"+this.host+":8080/devices",device, this.getOptions());
+    return this.http.post<Device[]>("http://"+this.host+":"+this.port+"/devices",device, this.getOptions());
   }
   removeDevice(id: number): Observable<Device[]>{
-    return this.http.delete<Device[]>("http://"+this.host+":8080/devices/"+id, this.getOptions());
+    return this.http.delete<Device[]>("http://"+this.host+":"+this.port+"/devices/"+id, this.getOptions());
   }
   setSilenced(id: number, silenced: boolean): Observable<Device[]>{
-    return this.http.get<Device[]>("http://"+this.host+":8080/devices/silenced/?id="+id+"&silenced="+silenced, this.getOptions());
+    return this.http.get<Device[]>("http://"+this.host+":"+this.port+"/devices/silenced/?id="+id+"&silenced="+silenced, this.getOptions());
   }
 }
 

@@ -13,11 +13,13 @@ import { SendEmailDialogComponent } from 'src/app/dialogs/send-email-dialog/send
 import { EmailService } from 'src/app/services/email.service';
 import { LoadingData, LoadingDialogComponent } from 'src/app/dialogs/loading-dialog/loading-dialog.component';
 import { EventService, DeviceEvent } from 'src/app/services/event.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+
 })
 export class HomeComponent implements OnInit {
   static readonly MODE_NEW = 1;
@@ -40,12 +42,20 @@ export class HomeComponent implements OnInit {
   subscriptionGroups: SubscriptionGroup[] = [];
   viewedSubscriptions: EmailSubscription[] = [];
   viewedEvents: DeviceEvent[] = [];
+  alertAudio = new Audio();
+  alertSubscription = timer(0, 2000).pipe( 
+    map(() => { 
+      if(this.alerting) this.alertAudio.play();
+    }) 
+  )
   constructor(private httpClient: HttpClient, private dialog: MatDialog) {
     this.deviceService = new DeviceService(httpClient);
     this.subscriptionGroupService = new SubscriptionGroupService(httpClient);
     this.emailSubscriptionService = new EmailSubscriptionService(httpClient);
     this.emailService = new EmailService(httpClient);
     this.eventService = new EventService(httpClient);
+    this.alertAudio.src = "../../../assets/alert.mp3";
+    this.alertAudio.load();
    }
   ngOnDestroy(): void {
     this.checkSubscription.unsubscribe();
@@ -57,6 +67,8 @@ export class HomeComponent implements OnInit {
         this.checkingStates = true;
       }) 
     ).subscribe();
+    this.alertSubscription.subscribe();
+    
     this.showHistory();
   }
   checkDiffrence(ds: Device[]): boolean{
@@ -348,5 +360,8 @@ export class HomeComponent implements OnInit {
     devices.push(...okDevices);
     return devices;
   }
-
+  changeHistoryDateRange(range: any){
+    console.log(range);
+    
+  }
 }

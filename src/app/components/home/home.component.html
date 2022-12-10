@@ -1,18 +1,23 @@
 <p>
-    <mat-toolbar class="py-4" color="primary">
-    <h2 class="me-4 toolbar-title"><mat-icon class="me-1">visibility</mat-icon>Monitor urządzeń</h2>
-    <button mat-button class="ms-4 toolbar-button" (click)="setNewMode()">
-        <mat-icon>add icon</mat-icon>
+    <mat-toolbar class="py-4 mb-4" color="accent">
+    <div class="me-4 toolbar-title">
+        <div class="me-2 title-icon d-flex p-2">
+            <mat-icon >visibility</mat-icon>
+        </div>
+        <h1  color="accent">MONITOR URZĄDZEŃ</h1>
+    </div>
+    <button mat-button class="ms-4 toolbar-button" color="primary" (click)="setNewMode()">
+        <mat-icon class="me-1">add icon</mat-icon>
         <span>Dodaj urządzenie</span>
       </button>
 
-      <button mat-button class="toolbar-button" (click)="setSubscriptionsMode()">
-          <mat-icon>speaker_notes</mat-icon>
+      <button mat-button class="toolbar-button" color="primary" (click)="setSubscriptionsMode()">
+          <mat-icon class="me-1">speaker_notes</mat-icon>
           <span>Subskrypcje</span>
       </button>
 
-      <button mat-button class="toolbar-button" (click)="setHistoryMode()">
-          <mat-icon>history</mat-icon>
+      <button mat-button class="toolbar-button" color="primary" (click)="setHistoryMode()">
+          <mat-icon class="me-1">history</mat-icon>
           <span>Historia</span>
       </button>
     <span style="flex: 1 1 auto;"></span>
@@ -24,13 +29,15 @@
         </span>
     </div>
   </mat-toolbar>
+
 </p>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-6">
+        <div class="col-6 devices-panel">
+
             <ul>
                 <li *ngFor="let d of devices" style="list-style:none;" class="my-1">
-                    <app-device-panel [device]="d" 
+                    <app-device-panel  [device]="d" 
                         (editEmitter)="setEditMode($event)" 
                         (removeEmitter)="remove($event)" 
                         (showHistoryEmitter)="showHistoryOfDevice($event)"
@@ -57,10 +64,12 @@
              (sendMailEmitter)="sendTestMail($event)"
              (addGroup)="openGroupDialog()"
              ></app-subscription-panel>
-             <app-history-panel *ngIf="mode==4"
+             <app-history-panel  *ngIf="mode==4"
              [data]="viewedEvents"
              [viewedDevice]="viewedDevice"
-             (showAllEmitter)="showHistory()"></app-history-panel>
+             (showAllEmitter)="showHistory()"
+             (changeDateRangeEmitter)="changeHistoryDateRange($event)"
+             ></app-history-panel>
         </div>
         
     </div>

@@ -7,10 +7,10 @@ import { HttpService } from './http.service';
 })
 export class SubscriptionGroupService extends HttpService {
   getGroups(): Observable<SubscriptionGroup[]>{
-    return this.http.get<SubscriptionGroup[]>("http://"+this.host+":8080/subscriptiongroup", this.getOptions());
+    return this.http.get<SubscriptionGroup[]>("http://"+this.host+":"+this.port+"/subscriptiongroup", this.getOptions());
   }
   postGroup(group: SubscriptionGroup): Observable<SubscriptionGroup[]>{
-    return this.http.post<SubscriptionGroup[]>("http://"+this.host+":8080/subscriptiongroup", group, this.getOptions());
+    return this.http.post<SubscriptionGroup[]>("http://"+this.host+":"+this.port+"/subscriptiongroup", group, this.getOptions());
   }
 }
 

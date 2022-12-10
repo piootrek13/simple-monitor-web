@@ -8,7 +8,7 @@ import { HttpService } from './http.service';
 export class EventService extends HttpService {
 
   getEventsByDevice(device: number): Observable<DeviceEvent[]>{
-    return this.http.get<DeviceEvent[]>("http://"+this.host+":8080/events?device="+device, this.getOptions());
+    return this.http.get<DeviceEvent[]>("http://"+this.host+":"+this.port+"/events?device="+device, this.getOptions());
   }
 
 }

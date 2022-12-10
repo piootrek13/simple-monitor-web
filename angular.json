@@ -26,7 +26,8 @@
               "./src/assets/fontello/css/fontello.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/bootstrap-icons/font/bootstrap-icons.css",
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/theme-dark.css",
+              
               "src/styles.css"
             ],
             "scripts": [
@@ -39,12 +40,12 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumError": "4kb" 
                 }
               ],
               "fileReplacements": [
@@ -96,7 +97,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/theme-dark.css",
               "src/styles.css"
             ],
             "scripts": []

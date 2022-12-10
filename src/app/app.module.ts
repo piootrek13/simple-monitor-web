@@ -11,6 +11,7 @@ import { MatMenuModule} from '@angular/material/menu';
 import { MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule} from '@angular/material/icon';
 import { MatInputModule} from '@angular/material/input';
+import { MatNativeDateModule, MAT_DATE_LOCALE} from '@angular/material/core';
 import { MatBadgeModule} from '@angular/material/badge';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { MatTabsModule} from '@angular/material/tabs';
@@ -20,6 +21,8 @@ import { MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatTableModule} from '@angular/material/table';
 import { MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -68,6 +71,9 @@ const routes: Routes = [
     MatIconModule,
     MatInputModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatSlideToggleModule,
+    MatNativeDateModule,
     MatSelectModule,
     MatButtonToggleModule,
     MatPaginatorModule,
@@ -79,7 +85,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
-    {provide: MatPaginatorIntl, useValue: PaginatorConfig()}
+    {provide: MatPaginatorIntl, useValue: PaginatorConfig()},
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+
   ],
   bootstrap: [AppComponent]
 })

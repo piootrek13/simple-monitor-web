@@ -1,13 +1,11 @@
-mat-card-title{
-    color: #3f51b5;
 
-}
 .device-card{
     border: 2px solid transparent;
 
+
 }
 .device-inactive{
-    background-color: lightgray;
+    background-color: #303030;
 }
 .status-ok{
     border: 2px solid green;
@@ -23,11 +21,11 @@ mat-card-title{
     
     0%{
         border: 2px solid transparent;
-        background-color: white;
+        background-color: #393939;
     }
     50%{
         border: 2px solid red;
-        background-color: rgb(255, 230, 230);
+        background-color: #393939;
     }
     
 }
@@ -39,5 +37,5 @@ mat-card-title{
 
   .silence-active-btn{
     border: none;
-    color: rgb(0, 150, 255);
+    color: #00c9ff;
   }

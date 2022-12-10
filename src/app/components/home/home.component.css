@@ -14,14 +14,24 @@
     }
     
 }
-.toolbar-button{
+/* .toolbar-button{
     font-weight:lighter;
     color: lightgray;
 }
 .toolbar-button:hover{
     color: white;
+} */
+.title-icon{
+    background-color: #00799b;
+    border-radius: 50%;
 }
 .toolbar-title{
     display: flex;
     align-items: center;
+    /* background-color: rgba(137, 43, 226, 0.356);
+    border: 1px solid rgba(211, 211, 211, 0.315); */
+}
+.devices-panel{
+    max-height: calc(100vh-100px);
+    overflow: auto;
 }

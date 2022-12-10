@@ -26,9 +26,11 @@ export class HttpService {
   }
 
   host: string;
+  port: string;
 
   constructor(protected http: HttpClient) {
     this.host=window.location.hostname;
+    this.port="8081";
    // this.host="192.168.31.85";
    }
 }

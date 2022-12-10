@@ -8,7 +8,7 @@ import { HttpService } from './http.service';
 export class EmailService extends HttpService {
 
   post(email: Email): Observable<Email>{
-    return this.http.post<Email>("http://"+this.host+":8080/sendemail", email, this.getOptions());
+    return this.http.post<Email>("http://"+this.host+":"+this.port+"/sendemail", email, this.getOptions());
   }
 }
 

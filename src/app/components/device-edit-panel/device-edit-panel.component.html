@@ -1,9 +1,13 @@
-<mat-card>
+<mat-card class="">
     <mat-card-title>
-        <span color="primary"  class="{{mode == 1 ? 'icon-plus' : 'icon-pencil'}}"> {{mode == 1 ? 'Nowe urządzenie' : 'Edytuj'}}</span>
+        <div class="d-flex">
+            <mat-icon class="me-1" *ngIf="mode == 1">add icon</mat-icon>
+            <mat-icon class="me-1" *ngIf="mode != 1">edit</mat-icon>
+            <span>{{mode == 1 ? 'Nowe urządzenie' : 'Edytuj'}}</span>
+        </div>
    </mat-card-title>
    <mat-card-content class="m-4">
-    <mat-checkbox style="width: 100%;" class="my-3" color="primary" [(ngModel)]="device.active">Aktywny</mat-checkbox>
+    <mat-slide-toggle style="width: 100%;" class="my-3" color="primary" [(ngModel)]="device.active">Aktywny</mat-slide-toggle>
 
     <mat-form-field class="edit-field" appearance="fill">
         <mat-label>Nawa</mat-label>
@@ -22,7 +26,7 @@
     </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">
-        <button  mat-button color="primary"  (click)="saveEmitter.emit(device);"><span class="icon-floppy">Zapisz</span></button>
-        <button  mat-button color="warn" (click)="cancelEmitter.emit();"><span class="icon-cancel" >Anuluj</span></button>
+        <button  mat-button color="primary"  (click)="saveEmitter.emit(device);"><mat-icon class="me-1">save</mat-icon> <span>Zapisz</span></button>
+        <button  mat-button color="warn" (click)="cancelEmitter.emit();"><mat-icon class="me-1">close</mat-icon><span>Anuluj</span></button>
     </mat-card-actions>
 </mat-card>

@@ -1,7 +1,9 @@
 <mat-card>
-    <mat-card-title color="primary">
-        <mat-icon class="me-2">speaker_notes</mat-icon>
-        Subskrypcje
+    <mat-card-title>
+      <div class="d-flex">
+        <mat-icon class="me-1">speaker_notes</mat-icon>
+        <span>Subskrypcje</span>
+      </div>
    </mat-card-title>
    <mat-card-content>
         <mat-tab-group>
@@ -41,10 +43,10 @@
                <button (click)="addSubscription(selGroup.id)" class="float-end my-3"  mat-button color="primary"><mat-icon class="me-1">add</mat-icon><span>Dodaj subskrypcję</span></button>
  
             </mat-tab>
-            <mat-tab label="SMS"> Content 2 </mat-tab>
+            <mat-tab label="SMS"> Funkcjonalność niedostęna w obecnej wersji </mat-tab>
         </mat-tab-group>
    </mat-card-content>
    <mat-card-actions align="end">
-     <button  mat-button color="warn" (click)="closeEmitter.emit()"><span class="icon-cancel" >Zamknij</span></button>
+     <button  mat-button color="warn" (click)="closeEmitter.emit()"><mat-icon class="me-1">close</mat-icon><span >Zamknij</span></button>
  </mat-card-actions>
 </mat-card>
