@@ -38,6 +38,7 @@ import { SendEmailDialogComponent } from './dialogs/send-email-dialog/send-email
 import { LoadingDialogComponent } from './dialogs/loading-dialog/loading-dialog.component';
 import { HistoryPanelComponent } from './components/history-panel/history-panel.component';
 import { PaginatorConfig } from './configurations/PaginatorConfig';
+import { AppInfoDialogComponent } from './dialogs/app-info-dialog/app-info-dialog.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
  ];
@@ -54,6 +55,7 @@ const routes: Routes = [
     SendEmailDialogComponent,
     LoadingDialogComponent,
     HistoryPanelComponent,
+    AppInfoDialogComponent,
   ],
   imports: [
     BrowserModule,

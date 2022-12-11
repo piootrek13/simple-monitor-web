@@ -14,6 +14,8 @@ import { EmailService } from 'src/app/services/email.service';
 import { LoadingData, LoadingDialogComponent } from 'src/app/dialogs/loading-dialog/loading-dialog.component';
 import { EventService, DeviceEvent } from 'src/app/services/event.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AppInfoDialogComponent } from 'src/app/dialogs/app-info-dialog/app-info-dialog.component';
+import { ApiVersionService } from 'src/app/services/api-version.service';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +34,7 @@ export class HomeComponent implements OnInit {
   deviceService: DeviceService;
   subscriptionGroupService: SubscriptionGroupService;
   emailSubscriptionService: EmailSubscriptionService;
+  apiVersionService: ApiVersionService;
   emailService: EmailService;
   eventService: EventService;
   checkSubscription: Subscription = new Subscription;
@@ -48,12 +51,15 @@ export class HomeComponent implements OnInit {
       if(this.alerting) this.alertAudio.play();
     }) 
   )
+  apiVersion = "0.0_UNKNOWN";
+  appVersion = "0.7_BETA";
   constructor(private httpClient: HttpClient, private dialog: MatDialog) {
     this.deviceService = new DeviceService(httpClient);
     this.subscriptionGroupService = new SubscriptionGroupService(httpClient);
     this.emailSubscriptionService = new EmailSubscriptionService(httpClient);
     this.emailService = new EmailService(httpClient);
     this.eventService = new EventService(httpClient);
+    this.apiVersionService = new ApiVersionService(httpClient);
     this.alertAudio.src = "../../../assets/alert.mp3";
     this.alertAudio.load();
    }
@@ -61,6 +67,7 @@ export class HomeComponent implements OnInit {
     this.checkSubscription.unsubscribe();
   }
   ngOnInit(): void {
+    this.checkApiVersion();
     this.checkSubscription = timer(0, 1000).pipe( 
       map(() => { 
         if(!this.checkingStates) this.checkStates(); 
@@ -363,5 +370,18 @@ export class HomeComponent implements OnInit {
   changeHistoryDateRange(range: any){
     this.refreshViewedEvents(this.viewedDevice.id, range);
     
+  }
+  checkApiVersion(){
+    this.apiVersionService.getVersion().subscribe(
+      data=>{
+        this.apiVersion = data.version;
+      }
+    );    
+  }
+  showAppInfo(){
+    const dialogRef = this.dialog.open(AppInfoDialogComponent, {data:{
+    appVersion: this.appVersion, 
+    apiVersion: this.apiVersion,
+    autor: "Piotr Podgórny"}});
   }
 }

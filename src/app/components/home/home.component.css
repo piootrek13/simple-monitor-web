@@ -27,6 +27,7 @@
 .toolbar-title{
     display: flex;
     align-items: center;
+    cursor: pointer;
     /* background-color: rgba(137, 43, 226, 0.356);
     border: 1px solid rgba(211, 211, 211, 0.315); */
 }
