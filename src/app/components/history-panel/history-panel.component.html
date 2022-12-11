@@ -6,7 +6,10 @@
    <mat-card-content class="m-4">
 
     <div align="end" class="mx-3" style="height: 40px;">
-      <button *ngIf="viewedDevice.id>-1" mat-button color="primary" (click)="showAllEmitter.emit()"><span>Pokaż wszystkie</span></button>
+      <button *ngIf="viewedDevice.id>-1" mat-button color="primary" (click)="showAllEmitter.emit()">
+        <mat-icon class="me-1">visibility</mat-icon>
+        <span>Pokaż wszystkie</span>
+      </button>
     </div>
     <mat-form-field class="mx-3" appearance="outline">
       <mat-label>Zakres dat</mat-label>

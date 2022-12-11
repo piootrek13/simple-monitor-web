@@ -39,3 +39,9 @@
     border: none;
     color: #00c9ff;
   }
+  .state-ok{
+    background-color: #00aa0080;
+  }
+  .state-alert{
+    background-color: #ff000080;
+  }

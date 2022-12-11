@@ -13,9 +13,15 @@
 
      <mat-card-content class="">
           <p style="color: dimgray;" *ngIf="!device.active" class="h6 me-4 icon-eye-off">   NIEAKTYWNY</p>
-          <div class="d-flex" style="align-items: baseline;" *ngIf="device.active">
-               <p class=" me-4 h6 {{device.state==0 ? 'icon-ok text-ok' : device.state<0 ? 'icon-unlink text-error' : 'icon-bell text-error'}} "> {{device.state==0 ? 'OK' : device.state<0 ? 'BRAK KOMUNIKACJI' : 'ALARM'}}</p>
-               <p *ngIf="device.state>=0"  class=" me-2"> Wystąpienia alarmu: {{device.counter}}</p>
+          <div class="d-flex" style="align-items: center;" *ngIf="device.active">
+               <div class="{{device.state == 0 ? 'state-ok' : 'state-alert'}} d-flex p-2 rounded me-4" style="align-items: center;" >
+                    <mat-icon *ngIf="device.state == 0" class="me-2">check</mat-icon>
+                    <mat-icon *ngIf="device.state > 0" class="me-2">notification_important</mat-icon>
+                    <mat-icon *ngIf="device.state < 0" class="me-2">link_off</mat-icon>
+                    <span class="me-4"> {{device.state==0 ? 'OK' : device.state<0 ? 'BRAK KOMUNIKACJI' : 'ALARM'}}</span>
+               </div>
+
+               <span *ngIf="device.state>=0"  class=" me-2"> Wystąpienia alarmu: {{device.counter}}</span>
                <button *ngIf="device.state>=0" mat-button>Zeruj</button>
           </div>
 
